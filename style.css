@@ -1,0 +1,246 @@
+
+:root {
+  --card-blue: #326b8d;
+  --aqua: #08aaa9;
+  --nav-bg: #f8f8f8;
+  --ink: #111;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  background: #fff;
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow-x: hidden;
+}
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: max(16px, env(safe-area-inset-top))
+           5%
+           calc(112px + env(safe-area-inset-bottom));
+  position: relative;
+}
+
+/* BLUE PASS CARD */
+
+.pass-card {
+  margin: 82px auto 0;
+  width: 100%;
+  height: min(690px, calc(100svh - 184px - env(safe-area-inset-top)));
+  border-radius: 32px;
+  background: var(--card-blue);
+  color: #fff;
+  text-align: center;
+  padding: 38px 5% 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.pass-type {
+  flex: none;
+  margin: 0 0 17px;
+  font-size: 28px;
+  line-height: 1.15;
+  font-weight: 400;
+}
+
+.pass-date {
+  flex: none;
+  margin: 0 0 19px;
+  font-size: clamp(31px, 8.5vw, 36px);
+  line-height: 1.12;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pass-time {
+  flex: none;
+  margin: 0 0 28px;
+  font-size: clamp(34px, 9vw, 38px);
+  line-height: 1.12;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.transit-name {
+  flex: none;
+  margin: 0 0 6px;
+  font-size: 27px;
+  line-height: 1.15;
+  font-weight: 400;
+}
+
+/* VIDEO */
+
+.video-placeholder {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  flex: none;
+  overflow: hidden;
+  background: transparent;
+  position: relative;
+}
+
+.video-placeholder video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border: 0;
+  background: transparent;
+}
+
+/* EXPIRE BUTTON */
+
+.expire-button {
+  flex: none;
+  border: 0;
+  border-radius: 999px;
+  background: var(--aqua);
+  color: #fff;
+  width: min(60%, 280px);
+  height: 65px;
+  margin: 20px 0 24px;
+  font-size: 27px;
+  font-weight: 700;
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* EXPIRY TEXT */
+
+.expiry-copy {
+  flex: none;
+  max-width: 100%;
+  margin: 0;
+  font-size: clamp(29px, 7.8vw, 34px);
+  line-height: 1.22;
+  font-weight: 700;
+}
+
+.user-id {
+  flex: none;
+  margin: auto 0 0;
+  padding-top: 14px;
+  font-size: 24px;
+  line-height: 1.15;
+  font-weight: 400;
+}
+
+/* BOTTOM NAVIGATION */
+
+.bottom-nav {
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: calc(104px + env(safe-area-inset-bottom));
+  padding: 7px 8px calc(7px + env(safe-area-inset-bottom));
+  background: var(--nav-bg);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  box-shadow: 0 -4px 16px rgba(0,0,0,.04);
+}
+
+.nav-item {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #111;
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 1.1;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #e5f8f7;
+  display: grid;
+  place-items: center;
+}
+
+.nav-item.active .nav-icon {
+  background: #5bd0ce;
+}
+
+.nav-icon svg {
+  width: 36px;
+  height: 36px;
+  fill: none;
+  stroke: #18282c;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nav-item.active .nav-icon svg {
+  stroke: #fff;
+}
+
+/* SHORTER IPHONE VIEWPORTS */
+
+@media (max-height: 780px) {
+  .pass-card {
+    margin-top: 70px;
+    height: calc(100svh - 160px - env(safe-area-inset-top));
+    padding-top: 28px;
+  }
+
+  .pass-type {
+    margin-bottom: 14px;
+  }
+
+  .pass-date {
+    margin-bottom: 16px;
+  }
+
+  .pass-time {
+    margin-bottom: 22px;
+  }
+
+  .expire-button {
+    margin-top: 15px;
+    margin-bottom: 18px;
+  }
+
+  .bottom-nav {
+    height: calc(94px + env(safe-area-inset-bottom));
+  }
+
+  .nav-icon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .nav-icon svg {
+    width: 35px;
+    height: 35px;
+  }
+}

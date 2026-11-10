@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,293 +7,28 @@
   <meta name="theme-color" content="#326b8d" />
   <title>Barrie Transit — Student Monthly Pass</title>
 
-  <style>
-    :root {
-      --card-blue: #326b8d;
-      --aqua: #08aaa9;
-      --nav-bg: #f8f8f8;
-      --ink: #111;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html, body {
-      width: 100%;
-      min-height: 100%;
-      margin: 0;
-      background: #fff;
-      color: var(--ink);
-      font-family: Arial, Helvetica, sans-serif;
-      -webkit-text-size-adjust: 100%;
-    }
-
-    body {
-      min-height: 100vh;
-      min-height: 100svh;
-      overflow-x: hidden;
-    }
-
-    .page {
-      width: 100%;
-      min-height: 100vh;
-      min-height: 100svh;
-      margin: 0 auto;
-      padding: max(16px, env(safe-area-inset-top))
-               5%
-               calc(112px + env(safe-area-inset-bottom));
-      position: relative;
-    }
-
-    .page-number {
-      position: absolute;
-      top: max(18px, env(safe-area-inset-top));
-      right: 5.2%;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #555;
-      font-size: 18px;
-    }
-
-    .page-number::before {
-      content: "";
-      width: 7px;
-      height: 20px;
-      background: #d94d49;
-      border-radius: 100% 0 0 100%;
-      display: inline-block;
-    }
-
-    .pass-card {
-      margin: 82px auto 0;
-      width: 100%;
-      height: min(690px, calc(100svh - 184px - env(safe-area-inset-top)));
-      min-height: 0;
-      border-radius: 32px;
-      background: var(--card-blue);
-      color: #fff;
-      text-align: center;
-      padding: 34px 6% 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    .pass-type {
-      flex: none;
-      margin: 0 0 27px;
-      font-size: 26px;
-      line-height: 1.15;
-      font-weight: 400;
-    }
-
-    .pass-date {
-      flex: none;
-      margin: 0 0 30px;
-      font-size: clamp(29px, 8.2vw, 34px);
-      line-height: 1.12;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .pass-time {
-      flex: none;
-      margin: 0 0 39px;
-      font-size: clamp(31px, 8.5vw, 36px);
-      line-height: 1.12;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .transit-name {
-      flex: none;
-      margin: 0 0 6px;
-      font-size: 25px;
-      line-height: 1.15;
-      font-weight: 400;
-    }
-
-    /* Video container: responsive 3:2 aspect ratio */
-    .video-placeholder {
-      width: 100%;
-      aspect-ratio: 3 / 2;
-      flex: none;
-      overflow: hidden;
-      background: transparent;
-      position: relative;
-    }
-
-    .video-placeholder video {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      border: 0;
-      background: transparent;
-    }
-
-    .expire-button {
-      flex: none;
-      border: 0;
-      border-radius: 999px;
-      background: var(--aqua);
-      color: #fff;
-      width: min(58%, 270px);
-      height: 62px;
-      margin: 22px 0 27px;
-      font-size: 25px;
-      font-weight: 700;
-      font-family: inherit;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-
-    .expiry-copy {
-      flex: none;
-      max-width: 100%;
-      margin: 0;
-      font-size: clamp(27px, 7.4vw, 32px);
-      line-height: 1.22;
-      font-weight: 700;
-    }
-
-    .user-id {
-      flex: none;
-      margin: auto 0 0;
-      padding-top: 14px;
-      font-size: 23px;
-      line-height: 1.15;
-      font-weight: 400;
-    }
-
-    /* Bottom navigation */
-    .bottom-nav {
-      position: fixed;
-      z-index: 5;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: calc(104px + env(safe-area-inset-bottom));
-      padding: 7px 8px calc(7px + env(safe-area-inset-bottom));
-      background: var(--nav-bg);
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      align-items: center;
-      box-shadow: 0 -4px 16px rgba(0,0,0,.04);
-    }
-
-    .nav-item {
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      color: #111;
-      text-decoration: none;
-      font-size: 17px;
-      line-height: 1.1;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .nav-icon {
-      width: 61px;
-      height: 61px;
-      border-radius: 50%;
-      background: #e5f8f7;
-      display: grid;
-      place-items: center;
-    }
-
-    .nav-item.active .nav-icon {
-      background: #5bd0ce;
-    }
-
-    .nav-icon svg {
-      width: 41px;
-      height: 41px;
-      fill: none;
-      stroke: #18282c;
-      stroke-width: 1.7;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .nav-item.active .nav-icon svg {
-      stroke: #fff;
-    }
-
-    /* Shorter iPhone viewports */
-    @media (max-height: 780px) {
-      .pass-card {
-        margin-top: 70px;
-        height: calc(100svh - 160px - env(safe-area-inset-top));
-        padding-top: 24px;
-      }
-
-      .pass-type {
-        margin-bottom: 18px;
-      }
-
-      .pass-date {
-        margin-bottom: 20px;
-      }
-
-      .pass-time {
-        margin-bottom: 25px;
-      }
-
-      .expire-button {
-        margin-top: 15px;
-        margin-bottom: 18px;
-      }
-
-      .bottom-nav {
-        height: calc(94px + env(safe-area-inset-bottom));
-      }
-
-      .nav-icon {
-        width: 55px;
-        height: 55px;
-      }
-
-      .nav-icon svg {
-        width: 37px;
-        height: 37px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 
 <body>
 
   <main class="page">
 
-
     <section class="pass-card" aria-label="Student Monthly Pass">
 
       <p class="pass-type">Student Monthly Pass</p>
 
-      <h1 class="pass-date">
-        Thu Nov 05 2026
-      </h1>
+      <h1 class="pass-date">Loading date...</h1>
 
-      <p class="pass-time">
-        05:09:58 PM
-      </p>
+      <p class="pass-time">Loading time...</p>
 
-      <p class="transit-name">
-        Barrie Transit
-      </p>
+      <p class="transit-name">Barrie Transit</p>
 
-      <!-- VIDEO PLACEHOLDER -->
+      <!-- VIDEO -->
       <div class="video-placeholder">
-
         <video
+          id="busVideo"
           src="./videoooo.mp4"
           autoplay
           muted
@@ -304,7 +40,6 @@
         >
           Your browser does not support HTML video.
         </video>
-
       </div>
 
       <button class="expire-button" type="button">
@@ -327,22 +62,16 @@
   <!-- BOTTOM NAVIGATION -->
   <nav class="bottom-nav" aria-label="Main navigation">
 
-    <!-- HOME -->
     <a class="nav-item" href="#" aria-label="Home">
-
       <span class="nav-icon">
         <svg viewBox="0 0 64 64">
           <path d="M6 29 32 8l26 21M13 25v31h38V25M25 56V37h14v19"/>
         </svg>
       </span>
-
       <span>Home</span>
-
     </a>
 
-    <!-- PARKING -->
     <a class="nav-item" href="#" aria-label="Parking">
-
       <span class="nav-icon">
         <svg viewBox="0 0 64 64">
           <path d="M32 8c-12 0-21 9-21 21v7h42v-7C53 17 44 8 32 8Z"/>
@@ -350,14 +79,10 @@
           <path d="M32 25v12"/>
         </svg>
       </span>
-
       <span>Parking</span>
-
     </a>
 
-    <!-- TRANSIT -->
     <a class="nav-item active" href="#" aria-current="page" aria-label="Transit">
-
       <span class="nav-icon">
         <svg viewBox="0 0 64 64">
           <rect x="10" y="8" width="44" height="43" rx="5"/>
@@ -366,14 +91,10 @@
           <circle cx="44" cy="50" r="3"/>
         </svg>
       </span>
-
       <span>Transit</span>
-
     </a>
 
-    <!-- PERMITS -->
     <a class="nav-item" href="#" aria-label="Permits">
-
       <span class="nav-icon">
         <svg viewBox="0 0 64 64">
           <rect x="6" y="13" width="52" height="38" rx="5"/>
@@ -381,46 +102,10 @@
           <path d="M11 43c2-7 18-7 20 0M37 25h14M37 32h14M37 39h10"/>
         </svg>
       </span>
-
       <span>Permits</span>
-
     </a>
 
   </nav>
 
 </body>
 </html>
-
-<script>
-  function updatePassDateTime() {
-    const now = new Date();
-
-    // Current date
-    const dateOptions = {
-      weekday: 'short',
-      month: 'short',
-      day: '2-digit',
-      year: 'numeric'
-    };
-
-    // Current time
-    const timeOptions = {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: true
-    };
-
-    document.querySelector('.pass-date').textContent =
-      now.toLocaleDateString('en-CA', dateOptions);
-
-    document.querySelector('.pass-time').textContent =
-      now.toLocaleTimeString('en-CA', timeOptions);
-  }
-
-  // Update immediately when page loads
-  updatePassDateTime();
-
-  // Refresh every second
-  setInterval(updatePassDateTime, 1000);
-</script>
